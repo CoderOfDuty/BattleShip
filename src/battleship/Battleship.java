@@ -13,8 +13,12 @@ public class BattleShip {
 
 		int shipsCounter = shipsAndWidths.length; // Cantidad de barcos
 
-		ShipBoard shipBoardIa = new ShipBoard();
-		ShipBoard shipBoardPlayer = new ShipBoard();
+		ShipBoard shipBoardIa1 = new ShipBoard();
+		ShipBoard shipBoardPlayer1 = new ShipBoard();
+		ShipBoard shipBoardIa2 = new ShipBoard();
+		ShipBoard shipBoardPlayer2 = new ShipBoard();
+		
+		
 
 		Ship[] ship = new Ship[shipsCounter];
 
@@ -26,12 +30,14 @@ public class BattleShip {
 		System.out.println();
 
 		System.out.print("Check board: ");
-		shipBoardIa.emptyBoard();
+		shipBoardIa1.emptyBoard();
+		shipBoardIa2.emptyBoard();
 		System.out.println("Done"); // Tablero 1: Posiciones reveladas para
 		System.out.println(); // comprobaciones
 
 		System.out.print("Game board: ");
-		shipBoardPlayer.emptyBoard();
+		shipBoardPlayer1.emptyBoard();
+		shipBoardPlayer2.emptyBoard();
 		System.out.println("Done"); // Tablero 2: Tablero de juego sin revelar
 		System.out.println();
 
@@ -45,37 +51,53 @@ public class BattleShip {
 		System.out.println();
 
 		for (int x = 0; x < shipsCounter; x++) {
-			ship[x].shipPosition(shipBoardIa);
+			ship[x].shipPosition(shipBoardIa1);
+			ship[x].shipPosition(shipBoardIa2);
 		}
 		System.out.println();
 		System.out.println();
 
-		writeBoard(shipBoardIa);
-		writeBoard(shipBoardPlayer);
+		writeBoard(shipBoardIa1);
+		writeBoard(shipBoardPlayer1);
+		
+		writeBoard(shipBoardIa2);
+		writeBoard(shipBoardPlayer2);
 
 		System.out.println();
 		System.out.println("Start game!");
 		System.out.println();
 
-		gameLoop(shipBoardIa, shipBoardPlayer, frame, sc, shipsCounter, ship);
+		gameLoop(shipBoardIa1, shipBoardPlayer1,shipBoardIa2, shipBoardPlayer2, frame, sc, shipsCounter, ship);
 
 		System.out.println("Finish game");
 
 	}
 
-	public static void gameLoop(ShipBoard shipBoardIa, ShipBoard shipBoardPlayer, MenuSwing frame, Scanner sc,
+	public static void gameLoop(ShipBoard shipBoardIa1, ShipBoard shipBoardPlayer1, ShipBoard shipBoardIa2, ShipBoard shipBoardPlayer2, MenuSwing frame, Scanner sc,
 			int shipsCounter, Ship[] ship) {
 
-		while (shipBoardIa.stillShips(shipsCounter)) { // there are still ships
+		while (shipBoardIa1.stillShips(shipsCounter) || shipBoardIa2.stillShips(shipsCounter)) { // there are still ships
 														// on the board
 
 			int[] coords = new int[2];
+			
+			System.out.println("Player 1:");
+			System.out.println();
 
 			getCoords(coords, frame, sc);
 
-			updateBoard(coords, shipBoardIa, shipBoardPlayer, frame, shipsCounter, ship);
+			updateBoard(coords, shipBoardIa1, shipBoardPlayer1, frame, shipsCounter, ship);
 
-			writeBoard(shipBoardPlayer);
+			writeBoard(shipBoardPlayer1);
+			
+			System.out.println("Player 2:");
+			System.out.println();
+			
+			getCoords(coords, frame, sc);
+
+			updateBoard(coords, shipBoardIa2, shipBoardPlayer2, frame, shipsCounter, ship);
+
+			writeBoard(shipBoardPlayer2);
 		}
 	}
 
@@ -97,6 +119,7 @@ public class BattleShip {
 				System.out.print(shipBoard.getBoard()[x][y] + " ");
 			}
 		}
+		System.out.println();
 		System.out.println();
 
 	}
