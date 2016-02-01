@@ -18,8 +18,6 @@ public class BattleShip {
 		ShipBoard shipBoardIa2 = new ShipBoard();
 		ShipBoard shipBoardPlayer2 = new ShipBoard();
 		
-		
-
 		Ship[] ship = new Ship[shipsCounter];
 
 		for (int x = 0; x < shipsCounter; x++) {
