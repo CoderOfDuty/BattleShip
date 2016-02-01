@@ -15,7 +15,6 @@ public class Ship {
 	private int shipWidth;
 	private int[][] shipCoords;
 	private int hitCounter;
-	private int firedShips=0;
 
 	private int xBase;
 	private int yBase;
@@ -46,21 +45,21 @@ public class Ship {
 	public void setHitCounter(int hit) {
 		this.hitCounter = hit;
 	}
-	
-	public int[][] getShipCoords(){
+
+	public int[][] getShipCoords() {
 		return shipCoords;
 	}
-	
-	public boolean hit(ShipBoard shipBoardIa){
+
+	public boolean hit(ShipBoard shipBoardIa) {
 		hitCounter++;
-		if(hitCounter == shipWidth){
+		if (hitCounter == shipWidth) {
 			shipBoardIa.moreFiredShips();
 			return true;
-			
+
 		}
 		return false;
 	}
-	
+
 	public void shipPosition(ShipBoard shipBoardIa) {
 
 		getPositionOrientation();
@@ -205,12 +204,12 @@ public class Ship {
 
 		if (orientation == HORITZONTAL) {
 			if (xBase - 1 >= 0) {
-				shipBoardIa.setBoardCoords(xBase-1, yBase, SHIPSORROUND);
+				shipBoardIa.setBoardCoords(xBase - 1, yBase, SHIPSORROUND);
 			}
 
 		} else {
 			if (yBase - 1 >= 0) {
-				shipBoardIa.setBoardCoords(xBase, yBase-1, SHIPSORROUND);
+				shipBoardIa.setBoardCoords(xBase, yBase - 1, SHIPSORROUND);
 			}
 		}
 
@@ -223,12 +222,12 @@ public class Ship {
 
 		if (orientation == HORITZONTAL) { // ----
 			if (xBase + shipWidth < ShipBoard.BOARDWIDTH) { // -XXXXO
-				shipBoardIa.setBoardCoords(xBase+shipWidth, yBase, SHIPSORROUND);// ----
+				shipBoardIa.setBoardCoords(xBase + shipWidth, yBase, SHIPSORROUND);// ----
 			}
 
 		} else {
 			if (yBase + shipWidth < ShipBoard.BOARDWIDTH) { // |
-				shipBoardIa.setBoardCoords(xBase, yBase+shipWidth, SHIPSORROUND);// |X|
+				shipBoardIa.setBoardCoords(xBase, yBase + shipWidth, SHIPSORROUND);// |X|
 			} // O
 		}
 

@@ -9,9 +9,8 @@ public class BattleShip {
 		Scanner sc = new Scanner(System.in);// La clase Scanner del sistema para
 											// meter datos
 
-		//int[] shipsAndWidths = { 5, 4, 4, 3, 3, 2, 1 };
+		int[] shipsAndWidths = { 5, 4, 4, 3, 3, 2, 1 };
 		
-		int[] shipsAndWidths = { 1, 1 };
 
 		int shipsCounter = shipsAndWidths.length; // Cantidad de barcos
 
@@ -24,22 +23,22 @@ public class BattleShip {
 			ship[x] = new Ship(x, shipsAndWidths[x]);
 		}
 
-		for (int x = 0; x < shipsCounter; x++) {
-
-			System.out.println(ship[x].getShipWidth());
-		}
-
 		System.out.println("Cantidad de barcos: " + shipsAndWidths.length);
 		System.out.println();
 
 		System.out.print("Check board: ");
 		shipBoardIa.emptyBoard();
 		System.out.println("Done"); // Tablero 1: Posiciones reveladas para
-									// comprobaciones
+		System.out.println();		// comprobaciones
 
 		System.out.print("Game board: ");
 		shipBoardPlayer.emptyBoard();
 		System.out.println("Done"); // Tablero 2: Tablero de juego sin revelar
+		System.out.println();
+		
+		System.out.print("MenuSwing: ");
+		MenuSwing frame = new MenuSwing();
+		System.out.println("Done");
 		System.out.println();
 
 		System.out.println("SHIP POSITION: ");
@@ -49,22 +48,18 @@ public class BattleShip {
 		for (int x = 0; x < shipsCounter; x++) {
 			ship[x].shipPosition(shipBoardIa);
 		}
-
-		for (int x = 0; x < ShipBoard.BOARDWIDTH; x++) {
-
-			for (int y = 0; y < ShipBoard.BOARDWIDTH; y++) {
-				System.out.print(shipBoardIa.getBoard()[x][y] + " ");
-			}
-			System.out.println();
-		}
-
-		System.out.print("MenuSwing: ");
-		MenuSwing frame = new MenuSwing();
-		System.out.println("Done");
-
+		System.out.println();
+		System.out.println();
+		
+		writeBoard(shipBoardIa);
+		
+		System.out.println();
 		System.out.println("Start game!");
-
+		System.out.println();
+		
 		gameLoop(shipBoardIa, shipBoardPlayer, frame, sc, shipsCounter, ship);
+		
+		System.out.println("Finish game");
 
 	}
 
@@ -80,14 +75,10 @@ public class BattleShip {
 			updateBoard(coords, shipBoardIa, shipBoardPlayer, frame, shipsCounter, ship);
 
 			writeBoard(shipBoardPlayer);
-
 		}
-		
-		System.out.println("Finish");
-
 	}
 
-	public static void writeBoard(ShipBoard shipBoardPlayer) {
+	public static void writeBoard(ShipBoard shipBoard) {
 
 		System.out.print("   ");
 		for (int x = 0; x < ShipBoard.BOARDWIDTH; x++) {
@@ -106,7 +97,7 @@ public class BattleShip {
 
 			for (int y = 0; y < ShipBoard.BOARDWIDTH; y++) {
 
-				System.out.print(shipBoardPlayer.getBoard()[x][y] + " ");
+				System.out.print(shipBoard.getBoard()[x][y] + " ");
 			}
 		}
 		System.out.println();
@@ -178,6 +169,5 @@ public class BattleShip {
 			}
 		}
 		// frame.frame.repaint();
-
 	}
 }

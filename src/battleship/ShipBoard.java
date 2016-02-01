@@ -13,7 +13,6 @@ public class ShipBoard {
 	
 	public void moreFiredShips(){
 		firedShips++;
-		System.out.println("suma "+firedShips);
 	}
 
 	public ShipBoard() {
@@ -41,8 +40,6 @@ public class ShipBoard {
 	
 	public boolean stillShips(int shipsCounter) {
 		
-		System.out.println("getFired " + firedShips);
-		System.out.println("count"+ shipsCounter);
 		if(firedShips==shipsCounter)return false;
 		return true;
 	}
