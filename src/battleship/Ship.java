@@ -60,15 +60,15 @@ public class Ship {
 		return false;
 	}
 
-	public void shipPosition(ShipBoard shipBoardIa) {
+	public void shipPosition(ShipBoard shipBoard) {
 
 		getPositionOrientation();
 
-		if (comprobation(shipBoardIa)) {
+		if (comprobation(shipBoard)) {
 			System.out.println("Ship number: " + (idShip + 1) + " Width: " + shipWidth);
-			placement(shipBoardIa);
+			placement(shipBoard);
 		} else {
-			shipPosition(shipBoardIa);
+			shipPosition(shipBoard);
 		}
 	}
 
