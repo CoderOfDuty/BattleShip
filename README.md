@@ -1,3 +1,2 @@
 # BattleShip
-
-# The game of battleship
+The game of battleship
