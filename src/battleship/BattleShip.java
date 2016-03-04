@@ -52,6 +52,7 @@ public class BattleShip {
 			ship[x].shipPosition(shipBoardIa1);
 			ship[x].shipPosition(shipBoardIa2);
 		}
+		
 		System.out.println();
 		System.out.println();
 
@@ -81,8 +82,13 @@ public class BattleShip {
 			
 			System.out.println("Player 1:");
 			System.out.println();
-
-			getCoords(coords, frame, sc);
+			
+			/*
+			
+			while(frame.button.isEnabled()){
+				getCoords(coords, frame, sc);
+			}
+			*/
 
 			updateBoard(coords, shipBoardIa1, shipBoardPlayer1, frame, shipsCounter, ship);
 
@@ -126,7 +132,8 @@ public class BattleShip {
 
 		char xchar;
 		int x, y;
-
+		
+		
 		System.out.println("X-Coord? (A - J)");
 		xchar = sc.next().charAt(0);
 		while (!((xchar > 64 && xchar < 75) || (xchar > 96 && xchar < 107))) {
@@ -148,14 +155,14 @@ public class BattleShip {
 			y = sc.nextInt();
 		}
 		coords[1] = y - 1;
-
-		// sc.close();
+		
 
 		/*
-		 * coords[0]=Integer.parseInt(frame.xcoords.getText());
-		 * coords[1]=Integer.parseInt(frame.ycoords.getText());
-		 * 
-		 * frame.xcoords.setText(null); frame.ycoords.setText(null);
+		 coords[0]=Integer.parseInt(frame.xcoords.getText());
+		 coords[1]=Integer.parseInt(frame.ycoords.getText());
+		 
+		 frame.xcoords.setText(null); 
+		 frame.ycoords.setText(null);
 		 */
 
 	}

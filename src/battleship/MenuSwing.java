@@ -1,117 +1,164 @@
 package battleship;
 
-
 import java.awt.*;
 import java.awt.event.*;
-	
-public class MenuSwing{
-	
-	TextField xcoords;
-	TextField ycoords;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+public class MenuSwing {
+
+	JTextField xcoords;
+	JTextField ycoords;
 	BarMenu barMenu;
-	Frame frame;
-	//Label img;
-	//Image background;
+	JFrame frame;
 	Image[] img;
-	Button button;
-	Label background;
-	Image icon;
-	
-		
-	//Object [][] boardImg = {};
-			
-	public MenuSwing(){
-		frame = new Frame("Battleship");
+	//Button button;
+	JLabel background;
+	ImageIcon icon;
+
+	// Object [][] boardImg = {};
+
+	public MenuSwing() {
+		frame = new JFrame("Battleship");
 		barMenu = new BarMenu();
 		frame.setSize(700, 600);
-		
+
 		frame.addWindowListener(new FrameListener());
 		frame.setIconImage(Toolkit.getDefaultToolkit().createImage("img/icon.gif"));
-		frame.setLocation(200,100);
+		frame.setLocation(200, 100);
 		frame.setBackground(Color.BLACK);
+
+		//frame.setLayout(null);
+		//frame.setLayout(new BorderLayout());
+		//frame.setLayout(new FlowLayout());
+//		frame.setLayout(LayoutManager);
 		
-		frame.setLayout(new BorderLayout());
-		frame.setLayout(new FlowLayout());
-		//marco.setBackground(new Image("img/background.jpg"));
-		//background = Toolkit.getDefaultToolkit();
-		//frame.setBackground(Toolkit.getDefaultToolkit("background.jpg"));
 		frame.setMenuBar(barMenu);
-		
-		xcoords = new TextField();
+
+		xcoords = new JTextField();
 		xcoords.setName("X-coord");
-		ycoords = new TextField();
+		ycoords = new JTextField();
 		frame.add(xcoords);
 		frame.add(ycoords);
-		
-		//icon = Image.read();
-		background = new Label();
+
+		// icon = Image.read();
+		background = new JLabel();
 		frame.add(background);
 		
+		ImageIcon imgFire = new ImageIcon("img/img0.png");
+		ImageIcon imgEmpty = new ImageIcon("img/img1.png");
+		ImageIcon imgHit = new ImageIcon("img/img2.png");
+		ImageIcon imgWater = new ImageIcon("img/img3.png");
 		
-		button = new Button("FIRE");
+		JButton button;
+		
+		//BufferedImage buttonIcon = ImageIO.read(new File("myImage.png"));
+	    button = new JButton();
+	    //new ImageIcon(buttonIcon)
+	    button.setBorderPainted(false);
+	    button.setFocusPainted(false);
+	    button.setContentAreaFilled(false);
+
+		//button = new Button("FIRE");
+		
+		JButton n = new JButton("a", new ImageIcon());
 		frame.add(button);
-		button.setLocation(400, 400);
-		button.setSize(500, 250);
+		// button.setLocation(400, 400);
+		// button.setSize(500, 250);
+		button.setBounds(400, 400, 500, 250);
 		button.addActionListener(new ActionPerformed());
+
 		
-		
-		for(int i = 0;i <3; i++){
-			//img[i] = new Image("img/img"+i+".png");
-		}
-		//frame.pack();
-		frame.setVisible(false);
+
+		// frame.pack();
+		frame.setVisible(true);
 	}
-	class FrameListener  extends WindowAdapter{//close window X
-		public void windowClosing(WindowEvent e){
+
+	class FrameListener extends WindowAdapter {// close window X
+		public void windowClosing(WindowEvent e) {
 			System.exit(0);
 		}
+		public void windowOpened(WindowEvent e) {}
+		public void windowActivated(WindowEvent e) {}
+		public void windowIconified(WindowEvent e) {}
+		public void windowDeiconified(WindowEvent e) {}
+		public void windowDeactivated(WindowEvent e) {}
+		public void windowClosed(WindowEvent e) {}
+
 	}
-	class ActionPerformed implements ActionListener{
+
+	class ActionPerformed implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//Battleship.
-			
-			Button b = (Button)e.getSource();
-			if(b == button){
-				
-			}
-		}	
+
+			/*if (e.getSource().equals()) {
+
+			}*/
+		}
 	}
 
-	class BarMenu extends MenuBar{
+	public class BarMenu extends MenuBar {
 
 		Menu menuFile;
 		Menu menuEdit;
 		Menu menuHelp;
-		
-		BarMenu(){
+
+		MenuItem opcionNew;
+		MenuItem opcionOpen;
+		MenuItem opcionSave;
+		MenuItem opcionClose;
+
+		public BarMenu() {
 			menuFile = new Menu("File");
 			menuEdit = new Menu("Edit");
 			menuHelp = new Menu("Help");
-			
-			MenuItem opcionNew = new MenuItem("New");
-			MenuItem opcionOpen = new MenuItem("Open");
-			MenuItem opcionClose = new MenuItem("Close");
-			
+
+			opcionNew = new MenuItem("New");
+			opcionOpen = new MenuItem("Open");
+			opcionSave = new MenuItem("Save");
+			opcionClose = new MenuItem("Close");
+
+			// opcionSave.setShortcut(KeyStroke.getKeyStroke('S',Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+			opcionNew.addActionListener(new ActionMenu());
+			opcionOpen.addActionListener(new ActionMenu());
+			opcionClose.addActionListener(new ActionMenu());
+
 			menuFile.add(opcionNew);
 			menuFile.add(opcionOpen);
+			menuFile.add(opcionSave);
 			menuFile.add(opcionClose);
-			
+
 			add(menuFile);
 			add(menuEdit);
 			add(menuHelp);
 		}
 	}
-	
-	public class ActionMenu implements ActionListener{//Actions BarMenu
+
+	public class ActionMenu implements ActionListener {// Actions BarMenu
 
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			
+			if (e.getSource().equals(barMenu.opcionClose)) {
+				System.exit(0);
+			} else if (e.getSource().equals(barMenu.opcionNew)) {
+
+			} else if (e.getSource().equals(barMenu.opcionOpen)) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(null);
+				fc.setAccessory(null);
+
+			} else if (e.getSource().equals(barMenu.opcionSave)) {
+
+			}
+
 		}
-		
+
 	}
 
 }
